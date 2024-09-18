@@ -20,6 +20,8 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 2400;
 
+const apikey = process.env.API_KEY;
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -197,6 +199,7 @@ async function insertFarmingTips() {
 
         connection.release();
         console.log('Farming tips inserted successfully.');
+
         
     } catch (error) {
         console.error('Error inserting farming tips:', error.message);
@@ -738,6 +741,8 @@ app.get('/notifications', async(req, res) => {
                 },
                 errorMessage: null,
                 successMessage: null,
+                apikey: apikey,
+
             });
             
         } catch (error) {
@@ -747,7 +752,8 @@ app.get('/notifications', async(req, res) => {
                 city: null, 
                 username: null, 
                 errorMessage: 'Internal server error. Please try again later.', 
-                successMessage: null 
+                successMessage: null,
+                apikey: apikey,
             });
             }
     });
