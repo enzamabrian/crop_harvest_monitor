@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Crop</title>
+    <link rel="shortcut icon" href="./assets/logo2.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./css/dash-errors.css">
+
+    <style>
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+            margin-left: 250px; /* For the sidebar width */
+        }
+        .add-crop-form {
+            background-color: #f9f9f9;
+            padding: 40px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+        .add-crop-form h2 {
+            margin-bottom: 10px;
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+        .add-crop-form p.description {
+            font-size: 1rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        .add-crop-form .input-group {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .add-crop-form .input-group label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+            text-align: left;
+        }
+        .add-crop-form .input-with-icon {
+            position: relative;
+        }
+        .add-crop-form .input-with-icon i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #457D58;
+        }
+        .add-crop-form select, .add-crop-form input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif; /* Ensures the font is applied to the input and select fields */
+        }
+        .add-crop-form input::placeholder, .add-crop-form select::placeholder {
+            font-family: 'Poppins', sans-serif; /* Applies Poppins font to placeholders */
+        }
+        .add-crop-form input:focus {
+            border: 1px solid #457D58;
+            outline: none;
+            box-shadow: 0 0 10px rgba(139, 189, 155, 0.5);
+        }
+        .add-crop-form select:focus {
+            border: 1px solid #457D58;
+            outline: none;
+            box-shadow: 0 0 10px rgba(139, 189, 155, 0.5);
+        }
+        .add-crop-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #457D58;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif; /* Applies Poppins font to placeholders */
+        }
+        .add-crop-form button:hover {
+            background-color: #5E9B72;
+        }
+        .centered-logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .centered-logo img {
+            width: 80px;
+        }
+        @media (max-width: 768px) {
+            .add-crop-form {
+                padding: 20px;
+            }
+            .main-content {
+                margin-left: 0px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <!-- Error Message -->
+    <% if (errorMessage) { %>
+        <div id="error-message" style="padding-top: 20px;padding-bottom: -5px;" class="error-message-dashboard">
+            <p><%= errorMessage %></p>
+            <div class="progress-bar"></div>
+        </div><br>
+    <% } %>
+
+    <!-- Success Message -->
+    <% if (successMessage) { %>
+        <div id="success-message" style="padding-top: 20px;padding-bottom: -5px;" class="success-message-dashboard">
+            <p><%= successMessage %></p>
+            <div class="progress-bar-success"></div>
+        </div><br>
+    <% } %>
+
+    <header class="top-header">
+        <div class="logo-name">
+            <img src="assets/logo2.png" alt="Crop Harvest Monitor Logo" class="logo">
+            <h1>Crop Harvest Monitor</h1>
+        </div>
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </header>
+
+    <button class="bars-icon" id="barsIcon">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <button class="close-btn" id="closeBtn">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="profile">
+                <img src="assets/profile.png" alt="User Profile Picture" class="profile-img">
+                <div class="profile-info">
+                    <p>Welcome</p>
+                    <h2><%= user.full_name %></h2>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/dashboard"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="/my-crops"><i class="fas fa-seedling"></i> My Crops</a></li>
+                    <li><a href="/notifications"><i class="fas fa-bell"></i> Notifications</a></li>
+                    <li><a href="/weather"><i class="fas fa-cloud-rain"></i> Weather</a></li>
+                    <li><a href="/profile"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="add-crop-form">
+                <h2>Add a Crop</h2>
+                <p class="description">Fill out the details below to add a new crop to your farm.</p>
+                <form action="/add-crops" method="POST">
+                    <div class="input-group">
+                        <label for="crop_type">Crop Type</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-seedling"></i>
+                            <select name="crop_type" id="crop_type" required>
+                                <option value="">Select Crop</option>
+                                <option value="Tomato">Tomato</option>
+                                <option value="Carrot">Carrot</option>
+                                <option value="Beans">Beans</option>
+                                <option value="Maize">Maize</option>
+                                <option value="Cabbage">Cabbage</option>
+                                <option value="Green Pepper">Green Pepper</option>
+                                <option value="Banana">Banana</option>
+                                <option value="Peanut">Pea nuts</option>
+                                <option value="Soyabeans">Soya beans</option>
+                                <option value="Sugarcane">Sugarcane</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="planting_date">Planting Date</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input type="date" name="planting_date" id="planting_date" required>
+                        </div>
+                    </div>
+                    <button type="submit">Add Crop</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Crop Harvest Monitor. All rights reserved.</p>
+        <p>Contact us: <a href="mailto:info@cropharvestmonitor.com">info@cropharvestmonitor.com</a></p>
+    </footer>
+
+    <script src="./js/js.js"></script>
+
+
+</body>
+</html>

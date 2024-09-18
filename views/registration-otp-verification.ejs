@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+    <link rel="shortcut icon" href="./assets/logo2.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/reset_password.css">
+    <link rel="stylesheet" href="/css/messages.css"> <!-- Assuming a CSS file for styles -->
+     <!-- Assuming a CSS file for styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="forgot-password-form">
+            <div class="logo">
+                <img src="/assets/logo.png" alt="App Logo">
+            </div>
+            <h2>OTP Verification</h2>
+            <p>Please enter the OTP sent to <strong><%= email %></strong> </p>
+
+             <!-- Error Message -->
+             <% if (errorMessage) { %>
+                <div id="error-message" class="error-message">
+                    <p><%= errorMessage %></p>
+                    <div class="progress-bar"></div>
+                </div><br>
+            <% } %>
+
+
+             <!-- Success Message -->
+             <% if (successMessage) { %>
+                <div id="success-message" style="padding-top: 20px;padding-bottom: -5px;" class="success-message">
+                    <p><%= successMessage %></p>
+                    <div class="progress-bar-success"></div>
+                </div><br>
+            <% } %>
+
+
+
+            <form action="/verify-otp" method="POST">
+                <input type="hidden" name="email" value="<%= email %>">
+
+                <label for="otp">Enter OTP</label>
+                <div class="input-group">
+                    <i class="fas fa-key"></i>
+                    <input type="text" id="otp" name="otp" placeholder="Enter your OTP" required>
+                </div>
+
+                <button type="submit">Verify OTP</button>
+
+            </form>
+
+            <!-- Resend OTP Link -->
+            <p class="resendotp">
+                Didn't receive the OTP? 
+                <a href="/register">Resend OTP</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="./js/error.js"></script>
+
+</body>
+</html>
+
+

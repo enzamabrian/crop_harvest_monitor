@@ -1,0 +1,139 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Details</title>
+    <link rel="shortcut icon" href="./assets/logo2.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="top-header">
+        <div class="logo-name">
+            <img src="assets/logo2.png" alt="Crop Harvest Monitor Logo" class="logo">
+            <h1>Crop Harvest Monitor</h1>
+        </div>
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </header>
+
+    <button class="bars-icon" id="barsIcon">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <button class="close-btn" id="closeBtn">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="profile">
+                <img src="assets/profile.png" alt="User Profile Picture" class="profile-img">
+                <div class="profile-info">
+                    <p>Welcome</p>
+                    <h2><%= user.full_name %></h2>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/dashboard"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="/my-crops"><i class="fas fa-seedling"></i> My Crops</a></li>
+                    <li><a href="/notifications"><i class="fas fa-bell"></i> Notifications</a></li>
+                    <li><a href="/weather"><i class="fas fa-cloud-rain"></i> Weather</a></li>
+                    <li><a href="/profile"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content" style="width: 100%;">
+            <h2>Update Details</h2>
+            <p>Update your personal information to keep your profile current.</p>
+
+            <!-- Update Details Form -->
+            <div class="update-details">
+                <h3><i class="fas fa-user-edit"></i> Update Profile</h3>
+                    <!-- Update Profile Form -->
+                    <form action="/update-profile" method="POST">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="full_name" value="<%= user.full_name %>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" value="<%= user.email %>" required readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="text" id="phone" name="phone" value="<%= user.phone %>">
+                        </div>
+                       
+
+                        <label for="city">Select city</label>
+                            <div class="input-group">
+                            <select name="city" id="city" required>
+                            <option value="<%= user.city %>"><%= user.city %></option>
+                            <option value="Abuja">Abuja</option>
+                            <option value="Accra">Accra</option>
+                            <option value="Addis Ababa">Addis Ababa</option>
+                            <option value="Algiers">Algiers</option>
+                            <option value="Antananarivo">Antananarivo</option>
+                            <option value="Bamako">Bamako</option>
+                            <option value="Brazzaville">Brazzaville</option>
+                            <option value="Cairo">Cairo</option>
+                            <option value="Cape Town">Cape Town</option>
+                            <option value="Casablanca">Casablanca</option>
+                            <option value="Conakry">Conakry</option>
+                            <option value="Dakar">Dakar</option>
+                            <option value="Dar es Salaam">Dar es Salaam</option>
+                            <option value="Djibouti">Djibouti</option>
+                            <option value="Douala">Douala</option>
+                            <option value="Freetown">Freetown</option>
+                            <option value="Gaborone">Gaborone</option>
+                            <option value="Harare">Harare</option>
+                            <option value="Johannesburg">Johannesburg</option>
+                            <option value="Kampala">Kampala</option>
+                            <option value="Khartoum">Khartoum</option>
+                            <option value="Kigali">Kigali</option>
+                            <option value="Kinshasa">Kinshasa</option>
+                            <option value="Lagos">Lagos</option>
+                            <option value="Lusaka">Lusaka</option>
+                            <option value="Luanda">Luanda</option>
+                            <option value="Malabo">Malabo</option>
+                            <option value="Maputo">Maputo</option>
+                            <option value="Mogadishu">Mogadishu</option>
+                            <option value="Monrovia">Monrovia</option>
+                            <option value="Nairobi">Nairobi</option>
+                            <option value="Niamey">Niamey</option>
+                            <option value="Nouakchott">Nouakchott</option>
+                            <option value="Pretoria">Pretoria</option>
+                            <option value="Rabat">Rabat</option>
+                            <option value="Tripoli">Tripoli</option>
+                            <option value="Tunis">Tunis</option>
+                            <option value="Victoria">Victoria</option>
+                            <option value="Windhoek">Windhoek</option>
+                            <option value="Yaoundé">Yaoundé</option>
+
+                        </select>
+                </div>
+                        <button type="submit" class="btn-submit">Update</button>
+                    </form>
+            </div>
+        </main>
+    </div>
+
+
+    <footer class="footer">
+        <p>&copy; 2024 Crop Harvest Monitor. All rights reserved.</p>
+        <p>Contact us: <a href="mailto:info@cropharvestmonitor.com">info@cropharvestmonitor.com</a></p>
+    </footer>
+    <script src="./js/js.js"></script>
+
+</body>
+</html>
+

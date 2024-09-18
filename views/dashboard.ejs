@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="shortcut icon" href="./assets/logo2.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./css/dash-errors.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+
+    <!-- Error Message -->
+    <% if (errorMessage) { %>
+        <div id="error-message" style="padding-top: 20px;padding-bottom: -5px;" class="error-message-dashboard">
+            <p><%= errorMessage %></p>
+            <div class="progress-bar"></div>
+        </div><br>
+    <% } %>
+
+    <!-- Success Message -->
+    <% if (successMessage) { %>
+        <div id="success-message" style="padding-top: 20px;padding-bottom: -5px;" class="success-message-dashboard">
+            <p><%= successMessage %></p>
+            <div class="progress-bar-success"></div>
+        </div><br>
+    <% } %>
+
+    <header class="top-header">
+        <div class="logo-name">
+            <img src="assets/logo2.png" alt="Crop Harvest Monitor Logo" class="logo">
+            <h1>Crop Harvest Monitor</h1>
+        </div>
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </header>
+
+    <button class="bars-icon" id="barsIcon">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <button class="close-btn" id="closeBtn">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="profile">
+                <img src="assets/profile.png" alt="User Profile Picture" class="profile-img">
+                <div class="profile-info">
+                    <p>Welcome</p>
+                    <h2><%= user.full_name %></h2>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/dashboard"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="/my-crops"><i class="fas fa-seedling"></i> My Crops</a></li>
+                    <li><a href="/notifications"><i class="fas fa-bell"></i> Notifications</a></li>
+                    <li><a href="/weather"><i class="fas fa-cloud-rain"></i> Weather</a></li>
+                    <li><a href="/profile"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <h2>Dashboard</h2>
+            <p>Efficiently and accurately predict when to harvest your crops to improve on the yields and reduce wastage.</p>
+        
+            <div class="crop-list-heading">
+                <h3>My Crops</h3>
+            </div>
+        
+            <!-- Check if there are crops to display -->
+                <!-- Check if there are crops to display -->
+<% if (crops.length > 0) { %>
+    <div class="card-row">
+        <% crops.forEach(crop => { %>
+            <div class="card">
+                <div class="growth-percentage-container">
+                    <span class="growth-text">Growth</span> <!-- Growth label on the left -->
+                    <div class="percentage-label">
+                        <%= crop.percentage %>% <!-- Percentage label -->
+                    </div>
+                </div>
+                <img src="<%= crop.image_url %>" alt="Crop Image" class="card-img">
+                <div class="card-info">
+                    <h3 class="crop-name"><%= crop.crop_name %></h3>
+                    <p>Date of Planting: <%= crop.planting_date.toISOString().split('T')[0] %></p>
+                    <p>Expected Harvest: <%= crop.expected_harvest_date.toISOString().split('T')[0] %></p>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+
+            <% } else { %>
+                <p class="no-crops">No crops added yet. Add crops clicking the Add crop button</p> <!-- Message displayed when no crops are fetched -->
+            <% } %>
+        
+            <!-- Add Crop Section -->
+            <div class="add-crop-section">
+                <div class="add-crop-content">
+                    <div class="add-crop-text">
+                        <h2>Add a Crop</h2>
+                        <p>Add a new crop to monitor growth, predict harvest time, and manage your farm efficiently. This will help increase yield and reduce waste.</p>
+                    </div>
+                    <a href="/add-crop" class="add-crop-btn">
+                        <i class="fas fa-plus"></i> Add Crop
+                    </a>
+                </div>
+            </div>
+        
+            <!-- Notifications and Tips Section -->
+            <div class="notifications-tips">
+                <div class="notifications">
+                    <h3><i class="fas fa-bell"></i> Approaching Harvests</h3>
+                    <ul>
+                        <% if (cropsData.length === 0) { %>
+                            <li>No crops added yet.</li>
+                        <% } else { %>
+                            <% cropsData.forEach(function(crop) { %>
+                                <li>
+                                    <strong><%= crop.crop_name %></strong> will be ready for harvest in <strong><%= crop.days_to_harvest %> days</strong> (Expected Harvest: <%= crop.expected_harvest_date %>).
+                                </li>
+                                
+                            <% }); %>
+                        <% } %>
+                    </ul>
+                </div>
+        
+                <div class="tips">
+                    <h3><i class="fas fa-lightbulb"></i> Tips for Today</h3>
+                    <ul>
+                        <% if (tips.length > 0) { %>
+                            <% tips.forEach(tip => { %>
+                                <li><%= tip %></li>
+                            <% }) %>
+                        <% } else { %>
+                            <li>No tips available today.</li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Crop Harvest Monitor. All rights reserved.</p>
+        <p>Contact us: <a href="mailto:info@cropharvestmonitor.com">info@cropharvestmonitor.com</a></p>
+      </footer>
+        <script src="./js/js.js"></script>
+
+
+</body>
+</html>

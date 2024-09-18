@@ -1,0 +1,271 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body, html {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: #f4f4f4;
+
+}
+
+.container {
+    margin-top: 10vh;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    max-height: 800px;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 100px;
+
+}
+
+.register-form {
+    flex: 1;
+    padding: 20px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    width: 150px;
+    margin-bottom: 0px;
+}
+
+.register-form h2 {
+    margin-bottom: 10px;
+    color: #457D58;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.register-form p {
+    margin-bottom: 20px;
+    color: #6C757D;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+}
+
+.register-form label {
+    margin-bottom: 10px;
+    color: #4E4E4E;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+}
+
+form {
+    margin-left: 8%;
+    width: 80%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.input-group i {
+    position: absolute;
+    top: 44%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #457D58;
+}
+
+.register-form input, .register-form select {
+    padding: 10px 10px 10px 40px; /* Added padding to make space for icons */
+    margin-bottom: 6px;
+    margin-top: 3px;
+    width: 100%;
+    border: 1px solid #CED4DA;
+    border-radius: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.register-form input:focus {
+    border: 1px solid #457D58;
+    outline: none;
+    box-shadow: 0 0 10px rgba(139, 189, 155, 0.5);
+}
+
+.register-form select:focus {
+    border: 1px solid #457D58;
+    outline: none;
+    box-shadow: 0 0 10px rgba(139, 189, 155, 0.5);
+}
+
+.password-group {
+    display: flex;
+    gap: 15px; /* Space between the fields */
+}
+
+.password-group .input-group {
+    flex: 1; /* Take equal space */
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon i {
+    position: absolute;
+    top: 40%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #457D58;
+}
+
+.register-form button {
+    padding: 10px;
+    background-color: #457D58;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 50%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.register-form button:hover {
+    background-color: #5E9B72;
+}
+
+.login-link{
+    font-size: 14px;
+    color: #6C757D;
+    width: 100%;
+    margin-left: -80px;
+}
+
+.login-link p {
+    font-size: 14px;
+    color: #6C757D;
+    text-align: center;
+
+    
+}
+
+.login-link p span{
+    font-size: 14px;
+}
+
+.login-link p a {
+    color: #457D58;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        margin-top: 0;
+        flex-direction: column;
+        height: auto;
+        border-radius: 0;
+    }
+
+    .register-form {
+        padding: 30px;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .register-form h2, .register-form p {
+        text-align: center;
+    }
+
+    form {
+        width: 100%;
+        margin: 0;
+    }
+
+    .register-form input {
+        width: 100%;
+    }
+
+    .register-form button {
+        width: 100%;
+    }
+.login-link p {
+    margin-left: 8%;
+}
+
+   
+}
+
+@media (max-width: 480px) {
+    .register-form {
+        padding: 20px;
+    }
+
+    .register-form h2 {
+        font-size: 20px;
+    }
+
+    .register-form p {
+        font-size: 12px;
+    }
+
+    .register-form button {
+        font-size: 14px;
+    }
+}
+
+/* Define the fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Define the shake animation */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+
+.error-message{
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: rgb(169, 1, 1);
+    margin-left: 8%;
+    opacity: 0; /* Start hidden */
+    animation: fadeIn 0.5s forwards, shake 0.5s;
+    
+}
+
+
+

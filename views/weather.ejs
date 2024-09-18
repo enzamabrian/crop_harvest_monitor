@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Information</title>
+    <link rel="shortcut icon" href="./assets/logo2.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="top-header">
+        <div class="logo-name">
+            <img src="assets/logo2.png" alt="Crop Harvest Monitor Logo" class="logo">
+            <h1>Crop Harvest Monitor</h1>
+        </div>
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </header>
+
+    <button class="bars-icon" id="barsIcon">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <button class="close-btn" id="closeBtn">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="profile">
+                <img src="assets/profile.png" alt="User Profile Picture" class="profile-img">
+                <div class="profile-info">
+                    <p>Welcome</p>
+                    <h2><%= user.full_name %></h2>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/dashboard"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="/my-crops"><i class="fas fa-seedling"></i> My Crops</a></li>
+                    <li><a href="/notifications"><i class="fas fa-bell"></i> Notifications</a></li>
+                    <li><a href="/weather"><i class="fas fa-cloud-rain"></i> Weather</a></li>
+                    <li><a href="/profile"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">   
+            <h2>Current Weather Conditions for <%= user.city %></h2>
+            <div class="weather-info">
+                <div class="weather-card">
+                    <i class="fas fa-temperature-high"></i>
+                    <h3>Temperature</h3>
+                    <p id="temperature">Loading...</p>
+                </div>
+                <div class="weather-card">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h3>Humidity</h3>
+                    <p id="humidity">Loading...</p>
+                </div>
+                <div class="weather-card">
+                    <i class="fas fa-cloud-showers-heavy"></i>
+                    <h3>Rainfall</h3>
+                    <p id="rainfall">Loading...</p>
+                </div>
+                <div class="weather-card">
+                    <i class="fas fa-wind"></i>
+                    <h3>Wind Speed</h3>
+                    <p id="wind-speed">Loading...</p>
+                </div>
+                <div class="weather-card">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Conditions</h3>
+                    <p id="conditions">Loading...</p>
+                </div>
+            </div>
+
+            <div class="crop-tips" id="crop-tips">
+                <!-- Detailed crop tips will be inserted here -->
+            </div>
+            
+
+
+           
+
+
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Crop Harvest Monitor. All rights reserved.</p>
+    </footer>
+
+    <script>
+        
+            const sidebar = document.getElementById("sidebar");
+            const barsIcon = document.getElementById("barsIcon");
+            const closeBtn = document.getElementById("closeBtn");
+
+            barsIcon.addEventListener("click", function () {
+                sidebar.classList.add("open");
+            });
+
+            closeBtn.addEventListener("click", function () {
+                sidebar.classList.remove("open");
+            });
+
+
+            
+            document.addEventListener('DOMContentLoaded', () => {
+            const city = '<%= user.city %>';;
+            getWeather(city);
+            });
+
+
+        async function getWeather(city) {
+        const apiKey = 'e44f2e77e0a45e010221b7f257a99b49';
+        try {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+        const data = await response.json();
+
+        // Check if data is valid
+        if (!data || data.cod !== 200) {
+            console.error('Error fetching weather data:', data.message || 'Unknown error');
+            return;
+        }
+
+        document.getElementById('temperature').textContent = `${data.main.temp}°C`;
+        document.getElementById('humidity').textContent = `${data.main.humidity}%`;
+        document.getElementById('rainfall').textContent = `${data.rain ? data.rain['1h'] : 0} mm`;
+        document.getElementById('wind-speed').textContent = `${data.wind.speed} m/s`;
+        document.getElementById('conditions').textContent = data.weather[0].description;
+
+        // Generate and display crop tips based on the weather data
+        displayCropTips(data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+function displayCropTips(weatherData) {
+    let tips = '';
+    const temp = weatherData.main.temp;
+    const humidity = weatherData.main.humidity;
+    const rainfall = weatherData.rain ? weatherData.rain['1h'] : 0;
+    const conditions = weatherData.weather[0].description.toLowerCase();
+
+    // General Harvesting Tips
+    tips += '<h3>General Harvesting Tips</h3>';
+    tips += '<ul>';
+    tips += '<li>Always check the maturity indicators for your specific crop to ensure proper harvesting time.</li>';
+    tips += '</ul>';
+
+    // Temperature-Based Tips
+    tips += '<h3>Temperature-Based Tips</h3>';
+    tips += '<ul>';
+    if (temp > 30) { // High temperature
+        tips += '<li>For crops like tomatoes and peppers, harvest in the early morning or late evening to avoid heat stress and sunscald.</li>';
+        tips += '<li>Consider using shade nets for crops sensitive to high temperatures.</li>';
+    } else if (temp < 10) { // Low temperature
+        tips += '<li>If frost is expected, harvest crops like squash and pumpkins early to avoid frost damage.</li>';
+        tips += '<li>For root vegetables, ensure the ground is not frozen before harvesting to prevent damage.</li>';
+    } else {
+        tips += '<li>Temperatures between 10°C and 30°C are generally ideal for harvesting. Check crop-specific maturity indicators.</li>';
+    }
+    tips += '</ul>';
+
+    // Humidity-Based Tips
+    tips += '<h3>Humidity-Based Tips</h3>';
+    tips += '<ul>';
+    if (humidity > 80) { // High humidity
+        tips += '<li>High humidity can cause fungal diseases. Ensure you handle crops carefully and avoid wet conditions during harvest.</li>';
+        tips += '<li>Use ventilated storage to reduce humidity levels and prevent spoilage.</li>';
+    } else if (humidity < 30) { // Low humidity
+        tips += '<li>For crops like beans and corn, ensure proper hydration as low humidity can lead to poor yields.</li>';
+        tips += '<li>Consider adding a humidifier in storage areas if low humidity continues to affect your crops.</li>';
+    } else {
+        tips += '<li>Humidity levels are generally suitable for most crops. Monitor closely for any signs of excess or insufficient moisture.</li>';
+    }
+    tips += '</ul>';
+
+    // Rainfall-Based Tips
+    tips += '<h3>Rainfall-Based Tips</h3>';
+    tips += '<ul>';
+    if (rainfall > 10) { // Heavy rainfall
+        tips += '<li>Avoid harvesting immediately after heavy rainfall to prevent soil from sticking to the crops.</li>';
+        tips += '<li>Ensure proper drainage and avoid working in muddy fields to prevent crop damage.</li>';
+    } else if (rainfall < 5) { // Low rainfall
+        tips += '<li>For crops like lettuce and spinach, additional irrigation may be necessary to maintain optimal growth and harvest quality.</li>';
+        tips += '<li>Monitor soil moisture levels closely and adjust irrigation schedules accordingly.</li>';
+    } else {
+        tips += '<li>Moderate rainfall is generally good for most crops. Ensure proper drainage to avoid waterlogging.</li>';
+    }
+    tips += '</ul>';
+
+    // Weather Conditions-Based Tips
+    tips += '<h3>Weather Conditions-Based Tips</h3>';
+    tips += '<ul>';
+    if (conditions.includes('clear')) {
+        tips += '<li>Clear weather is ideal for harvesting. Plan your harvest on clear days to ensure optimal quality and reduce disease risk.</li>';
+    } else if (conditions.includes('cloudy')) {
+        tips += '<li>Cloudy weather can be beneficial as it reduces sunburn risk on sensitive crops. However, ensure you have sufficient daylight for harvesting.</li>';
+    } else if (conditions.includes('rain')) {
+        tips += '<li>Rainy conditions can affect harvesting efficiency. Try to harvest before or after rain showers to avoid complications.</li>';
+    } else {
+        tips += '<li>Monitor weather updates regularly to adjust your harvesting plans based on changing conditions.</li>';
+    }
+    tips += '</ul>';
+
+    // Display tips
+    document.getElementById('crop-tips').innerHTML = tips;
+   }
+
+    </script>
+</body>
+</html>

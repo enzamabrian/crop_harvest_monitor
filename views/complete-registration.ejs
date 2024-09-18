@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harvest Time Estimator - Register</title>
+    <link rel="shortcut icon" href="./assets/logo2.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/register.css">
+    <link rel="stylesheet" href="./css/messages.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="register-form">
+            <div class="logo">
+                <img src="./assets/logo.png" alt="Harvest Time Estimator Logo">
+            </div>
+            <h2>Complete account your creation by completing the form below</h2>
+            
+             <!-- Error Message -->
+             <% if (errorMessage) { %>
+                <div id="error-message" class="error-message">
+                    <p><%= errorMessage %></p>
+                    <div class="progress-bar"></div>
+                </div><br>
+            <% } %>
+
+
+            <form action="/register" method="POST" id="registration-form">
+
+                <label for="phone">Phone Number</label>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input text="text" id="phone" name="phone" placeholder="Enter your valid phone number" required>
+                </div>
+
+                <label for="city">Select city</label>
+                <div class="input-group">
+                    <i class="fas fa-city"></i>
+                        <select name="city" id="city" required>
+                            <option value="">Select City</option>
+                            <option value="Abuja">Abuja</option>
+                            <option value="Accra">Accra</option>
+                            <option value="Addis Ababa">Addis Ababa</option>
+                            <option value="Algiers">Algiers</option>
+                            <option value="Antananarivo">Antananarivo</option>
+                            <option value="Bamako">Bamako</option>
+                            <option value="Brazzaville">Brazzaville</option>
+                            <option value="Cairo">Cairo</option>
+                            <option value="Cape Town">Cape Town</option>
+                            <option value="Casablanca">Casablanca</option>
+                            <option value="Conakry">Conakry</option>
+                            <option value="Dakar">Dakar</option>
+                            <option value="Dar es Salaam">Dar es Salaam</option>
+                            <option value="Djibouti">Djibouti</option>
+                            <option value="Douala">Douala</option>
+                            <option value="Freetown">Freetown</option>
+                            <option value="Gaborone">Gaborone</option>
+                            <option value="Harare">Harare</option>
+                            <option value="Johannesburg">Johannesburg</option>
+                            <option value="Kampala">Kampala</option>
+                            <option value="Khartoum">Khartoum</option>
+                            <option value="Kigali">Kigali</option>
+                            <option value="Kinshasa">Kinshasa</option>
+                            <option value="Lagos">Lagos</option>
+                            <option value="Lusaka">Lusaka</option>
+                            <option value="Luanda">Luanda</option>
+                            <option value="Malabo">Malabo</option>
+                            <option value="Maputo">Maputo</option>
+                            <option value="Mogadishu">Mogadishu</option>
+                            <option value="Monrovia">Monrovia</option>
+                            <option value="Nairobi">Nairobi</option>
+                            <option value="Niamey">Niamey</option>
+                            <option value="Nouakchott">Nouakchott</option>
+                            <option value="Pretoria">Pretoria</option>
+                            <option value="Rabat">Rabat</option>
+                            <option value="Tripoli">Tripoli</option>
+                            <option value="Tunis">Tunis</option>
+                            <option value="Victoria">Victoria</option>
+                            <option value="Windhoek">Windhoek</option>
+                            <option value="Yaoundé">Yaoundé</option>
+
+                        </select>
+                </div>
+
+
+
+                <label for="password">Password</label>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <label for="confirm-password">Confirm Password</label>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm your password" required>
+                </div>
+
+                <button type="submit">Register</button>
+                <div class="login-link">
+                    <p><span>Already have an account?  </span><a href="/">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+
+
+<script src="./js/error.js"></script>
+</body>
+</html>

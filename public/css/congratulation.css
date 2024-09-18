@@ -1,0 +1,126 @@
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body,
+html {
+  width: 100%;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: 900px;
+  max-height: 800px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.register-form {
+  flex: 1;
+  padding: 20px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo img {
+  width: 150px;
+  margin-bottom: 0px;
+}
+
+.register-form h2 {
+  margin-bottom: 10px;
+  color: #457d58;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.register-form p {
+  margin-bottom: 20px;
+  color: #6c757d;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+}
+
+.register-form p a {
+  text-decoration: none;
+  color: #457d58;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    margin-top: 0;
+    flex-direction: column;
+    height: 90vh;
+    border-radius: 0;
+  }
+
+  body,
+  html {
+    height: 90vh;
+  }
+
+  .register-form {
+    padding: 30px;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .register-form h2,
+  .register-form p {
+    text-align: center;
+  }
+
+  form {
+    width: 100%;
+    margin: 0;
+  }
+
+  .register-form input {
+    width: 100%;
+  }
+
+  .register-form button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-form {
+    padding: 20px;
+  }
+
+  .register-form h2 {
+    font-size: 20px;
+  }
+
+  .register-form p {
+    font-size: 12px;
+  }
+}

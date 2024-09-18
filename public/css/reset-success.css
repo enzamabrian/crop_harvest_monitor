@@ -1,0 +1,64 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body, html {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.success-message {
+    text-align: center;
+}
+
+.success-message .icon {
+    font-size: 50px;
+    color: #457D58;
+    margin-bottom: 20px;
+}
+
+.success-message h2 {
+    font-size: 24px;
+    color: #457D58;
+    margin-bottom: 10px;
+}
+
+.success-message p {
+    font-size: 16px;
+    color: #6C757D;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .success-message h2 {
+        font-size: 20px;
+    }
+
+    .success-message p {
+        font-size: 14px;
+    }
+}
