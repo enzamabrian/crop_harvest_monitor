@@ -140,9 +140,10 @@ form {
     color: #457D58;
 }
 
+/* Style for the active (enabled) button */
 .register-form button {
     padding: 10px;
-    background-color: #457D58;
+    background-color: #457D58; /* Initial green background */
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -151,12 +152,30 @@ form {
     width: 50%;
     margin-bottom: 20px;
     margin-top: 20px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+/* Hover effect when the button is active */
 .register-form button:hover {
-    background-color: #5E9B72;
+    background-color: #5E9B72; /* Lighter green on hover */
+    transform: translateY(-2px); /* Slight lift effect */
 }
+
+/* Style for the inactive (disabled) button */
+.register-form button:disabled {
+    background-color: #ddd; /* Gray background for disabled button */
+    color: #888; /* Light gray text */
+    cursor: not-allowed; /* Not-allowed cursor when disabled */
+    opacity: 0.6; /* Slight transparency to indicate non-functional state */
+    transform: none; /* No lift effect */
+}
+
+/* Disabled hover effect (if any hover events are triggered) */
+.register-form button:disabled:hover {
+    background-color: #ddd; /* No color change when hovered */
+    transform: none; /* No lift effect */
+}
+
 
 .login-link{
     font-size: 14px;
@@ -266,6 +285,61 @@ form {
     animation: fadeIn 0.5s forwards, shake 0.5s;
     
 }
+
+
+/* Styling for password strength list */
+.password-strength {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+.password-strength li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    color: rgb(215, 0, 0);
+    font-size: 15px;
+}
+
+.password-strength .fas {
+    margin-right: 10px;
+}
+
+.password-strength .valid {
+    color: green;
+}
+
+.password-strength .invalid {
+    color: rgb(215, 0, 0);
+}
+
+/* Toggle Password Visibility */
+.toggle-password {
+    cursor: pointer;
+}
+
+.toggle-password {
+    cursor: pointer;
+    position: absolute;
+    right: 10px; /* Adjust spacing from the right */
+    top: 50%;
+    transform: translateY(-50%);
+    color: #555; /* Optional: adjust icon color */
+}
+
+#togglePassword{
+    position: absolute;
+    left: 93%;
+    cursor: pointer;
+}
+
+#toggleConfirmPassword{
+    position: absolute;
+    left: 93%;
+    cursor: pointer;
+}
+
 
 
 
