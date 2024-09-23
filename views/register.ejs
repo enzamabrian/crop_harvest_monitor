@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/messages.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
     <div class="container">
@@ -99,28 +100,41 @@
 
 
 
-                <label for="password">Password</label>
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                </div>
+    <label for="password">Password</label>
+    <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <i class="fas fa-eye" id="togglePassword"></i>
+    </div>
 
-                <label for="confirm-password">Confirm Password</label>
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm your password" required>
-                </div>
+    <label for="confirm-password">Confirm Password</label>
+    <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm your password" required>
+        <i class="fas fa-eye icon" id="toggleConfirmPassword"></i>
+    </div>
 
-                <button type="submit">Register</button>
-                <div class="login-link">
-                    <p><span>Already have an account?  </span><a href="/">Login</a></p>
-                </div>
-            </form>
+    <!-- Password Strength List -->
+    <ul id="password-strength" class="password-strength">
+        <li id="lowercase"><i class="fas fa-times-circle"></i> Lowercase Letter</li>
+        <li id="uppercase"><i class="fas fa-times-circle"></i> Uppercase Letter</li>
+        <li id="number"><i class="fas fa-times-circle"></i> Number</li>
+        <li id="special"><i class="fas fa-times-circle"></i> Special Character (!@#$%^&*)</li>
+        <li id="length"><i class="fas fa-times-circle"></i> At least 6 characters</li>
+    </ul>
+
+    <button type="submit" id="submit-btn" disabled>Register</button>
+
+    <div class="login-link">
+        <p><span>Already have an account? </span><a href="/">Login</a></p>
+    </div>
+</form>
         </div>
     </div>
-    
-
-
 <script src="./js/error.js"></script>
+<script src="./js/password-strength.js"></script>
+
+
 </body>
 </html>
+    
